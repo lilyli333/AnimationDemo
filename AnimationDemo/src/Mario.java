@@ -5,7 +5,7 @@ import java.util.*;
 
 import processing.core.PImage;
 
-public class Mario extends Sprite {
+public class Mario extends Sprite { 
 
 	public static final int MARIO_WIDTH = 40;
 	public static final int MARIO_HEIGHT = 60;
@@ -18,7 +18,9 @@ public class Mario extends Sprite {
 
 	// METHODS
 	public void walk(int dir) {
-		// WALK!
+		// WALK
+		super.x += dir*10;
+		
 	}
 
 	public void jump() {
