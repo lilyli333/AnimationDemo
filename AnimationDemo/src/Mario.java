@@ -25,13 +25,15 @@ public class Mario extends Sprite {
 
 	public void act(ArrayList<Shape> obstacles) {
 		// FALL (and stop when a platform is hit)
+		double minY = Integer.MAX_VALUE;
 		for(Shape obstacle : obstacles) {
-			if(super.getMaxX() < obstacle.getBounds().getMaxX()) {
-				moveByAmount(0, 10);
-			}
-			else {
-				break;
-			}
+			if(obstacle.getBounds().getMaxY() < minY)
+				minY = obstacle.getBounds().getMaxY();
+			
+		}
+		
+		while(super.getBounds().getMaxY() < minY) {
+			moveByAmount(0, 1);
 		}
 	}
 
