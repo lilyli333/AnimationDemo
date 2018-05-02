@@ -35,6 +35,6 @@ public class Mario extends Sprite {
 			}
 		}
 		if(!onGround)
-			moveByAmount(0,3);
+			moveByAmount(0,5);
 	}
 }
