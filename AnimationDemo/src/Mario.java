@@ -9,9 +9,11 @@ public class Mario extends Sprite {
 
 	public static final int MARIO_WIDTH = 40;
 	public static final int MARIO_HEIGHT = 60;
+	private static boolean onGround;
 
 	public Mario(PImage img, int x, int y) {
 		super(img, x, y, MARIO_WIDTH, MARIO_HEIGHT);
+		onGround = false;
 	}
 
 	// METHODS
@@ -22,6 +24,7 @@ public class Mario extends Sprite {
 	public void jump() {
 		// JUMP!
 		moveByAmount(0,-10);
+		onGround = false;
 	}
 
 	public void act(ArrayList<Shape> obstacles) {
@@ -30,13 +33,20 @@ public class Mario extends Sprite {
 
 		for(Shape obstacle : obstacles) {
 			if(obstacle.getBounds().getMinX() <= super.getMinX() && obstacle.getBounds().getMaxX() >= super.getMaxX()) {
-				if(obstacle.getBounds().getMinY() < minY)
+				if(obstacle.getBounds().getMinY() < minY) {
 					minY = obstacle.getBounds().getMinY();
+					onGround = false;
+				}
 			}
 
 		}
 
-		while(super.getBounds().getMaxY() < minY) {
+		if(super.getBounds().getMaxY() > minY) {
+			System.out.println("hellos");
+			onGround = true;
+		}
+
+		while(super.getBounds().getMaxY() < minY && !onGround) {
 			moveByAmount(0, 1);
 		}
 	}
